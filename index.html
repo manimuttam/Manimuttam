@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manimuttam Tours & Travels</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --gold:#f5a623;--dark:#0a1628;--blue:#0d3b7c;--light-blue:#1a6fc4;
+    --text:#1a1a2e;--muted:#555;--white:#fff;--card-bg:#f8faff;
+    --radius:14px;--shadow:0 4px 24px rgba(0,0,0,0.10);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.97);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:64px;box-shadow:0 2px 12px rgba(0,0,0,0.18)}
+  .logo{color:var(--gold);font-size:20px;font-weight:700;letter-spacing:0.5px;display:flex;align-items:center;gap:8px}
+  .logo span{color:#fff;font-weight:400;font-size:15px}
+  .nav-links{display:flex;gap:28px}
+  .nav-links a{color:#ccc;text-decoration:none;font-size:14px;transition:color .2s}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{background:var(--gold);color:var(--dark);padding:8px 20px;border-radius:24px;font-size:13px;font-weight:700;text-decoration:none;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
+
+  /* HERO */
+  .hero{min-height:100vh;background:linear-gradient(135deg,#0a1628 0%,#0d3b7c 55%,#1a6fc4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 6% 60px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-80px;right:-120px;width:520px;height:520px;border-radius:50%;background:rgba(245,166,35,0.08);pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-100px;left:-80px;width:380px;height:380px;border-radius:50%;background:rgba(26,111,196,0.13);pointer-events:none}
+  .hero-badge{background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--gold);padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:1px;margin-bottom:22px;display:inline-block}
+  .hero h1{color:#fff;font-size:clamp(32px,5vw,60px);font-weight:800;line-height:1.15;max-width:750px;margin-bottom:18px}
+  .hero h1 span{color:var(--gold)}
+  .hero p{color:rgba(255,255,255,0.75);font-size:clamp(15px,2vw,19px);max-width:520px;margin-bottom:36px;line-height:1.7}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:56px}
+  .btn-primary{background:var(--gold);color:var(--dark);padding:14px 32px;border-radius:32px;font-size:15px;font-weight:700;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 18px rgba(245,166,35,0.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,0.45)}
+  .btn-outline{border:2px solid rgba(255,255,255,0.35);color:#fff;padding:14px 32px;border-radius:32px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;backdrop-filter:blur(4px)}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* STATS BAR */
+  .stats-bar{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:20px 40px;display:flex;gap:40px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2}
+  .stat{text-align:center}
+  .stat-num{color:var(--gold);font-size:26px;font-weight:800}
+  .stat-label{color:rgba(255,255,255,0.6);font-size:12px;margin-top:2px;letter-spacing:0.5px}
+
+  /* CAR ILLUSTRATION */
+  .car-wrap{width:100%;max-width:540px;margin:0 auto 36px;position:relative}
+  .road{height:6px;background:rgba(255,255,255,0.12);border-radius:3px;margin-top:8px;position:relative;overflow:hidden}
+  .road-dash{position:absolute;top:50%;height:2px;width:40px;background:rgba(255,255,255,0.25);border-radius:1px;animation:dash 1.4s linear infinite}
+  @keyframes dash{from{left:-60px}to{left:110%}}
+
+  /* BOOKING FORM */
+  .booking-section{background:var(--dark);padding:56px 6%}
+  .section-label{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;text-align:center}
+  .section-title{color:#fff;font-size:clamp(22px,3vw,36px);font-weight:800;text-align:center;margin-bottom:6px}
+  .section-sub{color:rgba(255,255,255,0.55);text-align:center;font-size:15px;margin-bottom:36px}
+  .booking-form{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:32px;max-width:780px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .form-group{display:flex;flex-direction:column;gap:6px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;letter-spacing:0.5px}
+  .form-group input,.form-group select{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:12px 14px;color:#fff;font-size:14px;outline:none;transition:border-color .2s}
+  .form-group input::placeholder{color:rgba(255,255,255,0.35)}
+  .form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+  .form-group select option{background:#0d3b7c;color:#fff}
+  .form-submit{grid-column:1/-1;background:var(--gold);color:var(--dark);border:none;padding:14px;border-radius:32px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.4)}
+
+  /* SERVICES */
+  .services-section{padding:72px 6%;background:#f8faff}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;max-width:1100px;margin:0 auto}
+  .service-card{background:#fff;border-radius:var(--radius);padding:28px 22px;box-shadow:var(--shadow);border:1px solid #e8eef8;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+  .service-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(13,59,124,0.13)}
+  .service-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .25s}
+  .service-card:hover::after{transform:scaleX(1)}
+  .svc-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#e8f0fd,#d0e2f8);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px}
+  .svc-title{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--dark)}
+  .svc-desc{font-size:13px;color:var(--muted);line-height:1.6}
+  .svc-link{display:inline-block;margin-top:14px;color:var(--light-blue);font-size:13px;font-weight:600;text-decoration:none}
+
+  /* WHY US */
+  .why-section{padding:72px 6%;background:#fff}
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1050px;margin:0 auto}
+  .why-visual{background:linear-gradient(135deg,#0a1628,#0d3b7c);border-radius:20px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .why-metric{background:rgba(255,255,255,0.08);border-radius:12px;padding:20px 16px;text-align:center}
+  .why-metric-num{color:var(--gold);font-size:28px;font-weight:800}
+  .why-metric-label{color:rgba(255,255,255,0.55);font-size:11px;margin-top:4px}
+  .why-points{display:flex;flex-direction:column;gap:20px}
+  .why-point{display:flex;gap:14px;align-items:flex-start}
+  .why-icon{width:38px;height:38px;border-radius:10px;background:#e8f0fd;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .why-text h4{font-size:15px;font-weight:700;margin-bottom:4px;color:var(--dark)}
+  .why-text p{font-size:13px;color:var(--muted);line-height:1.6}
+
+  /* FLEET */
+  .fleet-section{background:#0a1628;padding:72px 6%}
+  .fleet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:0 auto}
+  .fleet-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);overflow:hidden;transition:transform .25s}
+  .fleet-card:hover{transform:translateY(-4px)}
+  .fleet-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:60px;background:rgba(255,255,255,0.04)}
+  .fleet-info{padding:18px}
+  .fleet-name{color:#fff;font-size:16px;font-weight:700;margin-bottom:6px}
+  .fleet-meta{display:flex;gap:10px;flex-wrap:wrap}
+  .fleet-tag{background:rgba(245,166,35,0.15);color:var(--gold);font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600}
+
+  /* TESTIMONIALS */
+  .testimonials-section{padding:72px 6%;background:#f8faff}
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:0 auto}
+  .testi-card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border:1px solid #e8eef8}
+  .stars{color:var(--gold);font-size:14px;margin-bottom:10px}
+  .testi-text{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px;font-style:italic}
+  .testi-author{font-size:13px;font-weight:700;color:var(--dark)}
+  .testi-loc{font-size:11px;color:var(--muted);margin-top:2px}
+
+  /* CONTACT */
+  .contact-section{background:linear-gradient(135deg,#0a1628,#0d3b7c);padding:72px 6%}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1050px;margin:0 auto}
+  .contact-info h2{color:#fff;font-size:32px;font-weight:800;margin-bottom:12px}
+  .contact-info p{color:rgba(255,255,255,0.65);font-size:15px;line-height:1.7;margin-bottom:24px}
+  .contact-item{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .c-icon{width:38px;height:38px;border-radius:10px;background:rgba(245,166,35,0.15);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .c-text{color:rgba(255,255,255,0.8);font-size:14px}
+  .c-text strong{color:#fff;display:block;font-size:13px;font-weight:600;margin-bottom:1px}
+  .contact-cta{display:flex;flex-direction:column;gap:14px}
+  .cta-card{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:12px;padding:22px;text-align:center;color:#fff}
+  .cta-card .big{font-size:24px;font-weight:800;color:var(--gold)}
+  .cta-card .label{font-size:12px;color:rgba(255,255,255,0.55);margin-top:4px}
+  .cta-btn{background:var(--gold);color:var(--dark);border:none;padding:14px 28px;border-radius:28px;font-size:15px;font-weight:700;cursor:pointer;width:100%;transition:opacity .2s}
+  .cta-btn:hover{opacity:.88}
+
+  /* FOOTER */
+  footer{background:#040d1a;color:rgba(255,255,255,0.45);text-align:center;padding:22px 6%;font-size:13px}
+  footer span{color:var(--gold)}
+
+  /* FLOATING CALL BUTTON */
+  .float-call{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--gold);color:var(--dark);width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 20px rgba(245,166,35,0.45);text-decoration:none;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(245,166,35,0.45)}50%{box-shadow:0 4px 32px rgba(245,166,35,0.75)}}
+
+  @media(max-width:680px){
+    .why-grid,.contact-grid{grid-template-columns:1fr}
+    .booking-form{grid-template-columns:1fr}
+    .form-group.full{grid-column:1}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING CALL -->
+<a href="tel:8606650815" class="float-call" title="Call Now">📞</a>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">🚖 <span>Manimuttam</span>&nbsp;<strong>Tours & Travels</strong></div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#fleet">Fleet</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#booking" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Kerala's Trusted Cab Service</div>
+  <h1>Your Journey,<br>Our <span>Commitment</span></h1>
+  <p>Comfortable, safe, and affordable taxi services across Kerala and all over India. Available 24/7 for you.</p>
+  <div class="hero-btns">
+    <a href="#booking" class="btn-primary">Book a Ride</a>
+    <a href="tel:8606650815" class="btn-outline">Call: 860 665 0815</a>
+  </div>
+  <!-- Car SVG Illustration -->
+  <div class="car-wrap">
+    <svg viewBox="0 0 520 140" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+      <!-- Body -->
+      <rect x="60" y="60" width="400" height="62" rx="10" fill="#1a6fc4"/>
+      <!-- Roof/cabin -->
+      <path d="M140 60 L170 20 Q180 12 195 12 L330 12 Q345 12 355 20 L380 60Z" fill="#0d3b7c"/>
+      <!-- Windows -->
+      <rect x="180" y="18" width="60" height="36" rx="5" fill="#8bc4f0" opacity=".85"/>
+      <rect x="255" y="18" width="65" height="36" rx="5" fill="#8bc4f0" opacity=".85"/>
+      <!-- Door lines -->
+      <line x1="248" y1="60" x2="248" y2="122" stroke="#0d3b7c" stroke-width="2"/>
+      <!-- Headlights -->
+      <rect x="62" y="72" width="28" height="16" rx="4" fill="#f5a623"/>
+      <rect x="430" y="72" width="28" height="16" rx="4" fill="#fff" opacity=".9"/>
+      <!-- Wheels -->
+      <circle cx="155" cy="126" r="22" fill="#1a1a2e"/>
+      <circle cx="155" cy="126" r="13" fill="#333"/>
+      <circle cx="155" cy="126" r="5" fill="#f5a623"/>
+      <circle cx="365" cy="126" r="22" fill="#1a1a2e"/>
+      <circle cx="365" cy="126" r="13" fill="#333"/>
+      <circle cx="365" cy="126" r="5" fill="#f5a623"/>
+      <!-- Taxi sign -->
+      <rect x="220" y="5" width="80" height="20" rx="4" fill="#f5a623"/>
+      <text x="260" y="19" text-anchor="middle" font-size="10" font-weight="700" fill="#0a1628">TAXI</text>
+    </svg>
+    <div class="road">
+      <div class="road-dash" style="animation-delay:0s;left:10%"></div>
+      <div class="road-dash" style="animation-delay:0.5s;left:40%"></div>
+      <div class="road-dash" style="animation-delay:1s;left:70%"></div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">5000+</div><div class="stat-label">Happy Customers</div></div>
+    <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Years of Service</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Available</div></div>
+    <div class="stat"><div class="stat-num">All Kerala</div><div class="stat-label">Coverage</div></div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="booking" class="booking-section">
+  <div class="section-label">Quick Booking</div>
+  <div class="section-title">Book Your Ride</div>
+  <div class="section-sub">Fill in details and we'll confirm your booking instantly</div>
+  <form class="booking-form" onsubmit="handleBook(event)">
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="e.g. Rahul Kumar" id="bk-name">
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="+91 00000 00000" id="bk-phone">
+    </div>
+    <div class="form-group">
+      <label>Pickup Location</label>
+      <input type="text" placeholder="e.g. Ernakulam, Kochi" id="bk-from">
+    </div>
+    <div class="form-group">
+      <label>Drop Location</label>
+      <input type="text" placeholder="e.g. Trivandrum Airport" id="bk-to">
+    </div>
+    <div class="form-group">
+      <label>Date of Travel</label>
+      <input type="date" id="bk-date">
+    </div>
+    <div class="form-group">
+      <label>Vehicle Type</label>
+      <select id="bk-vehicle">
+        <option value="">Select vehicle</option>
+        <option>Sedan (Swift Dzire / Etios)</option>
+        <option>SUV (Innova / Xylo)</option>
+        <option>Mini Van (Tempo Traveller)</option>
+        <option>Luxury (BMW / Mercedes)</option>
+      </select>
+    </div>
+    <div class="form-group full">
+      <label>Special Requirements (optional)</label>
+      <input type="text" placeholder="e.g. Baby seat, airport pickup, extra luggage…" id="bk-note">
+    </div>
+    <button type="submit" class="form-submit">Confirm Booking →</button>
+  </form>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="section-label" style="color:var(--blue)">What We Offer</div>
+  <div class="section-title" style="color:var(--dark)">Our Services</div>
+  <div class="section-sub" style="color:var(--muted)">Everything you need for comfortable travel</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="svc-icon">🛫</div>
+      <div class="svc-title">Airport Transfers</div>
+      <div class="svc-desc">Timely pickup and drop to Cochin, Trivandrum, Calicut airports. Flight tracking included.</div>
+      <a href="#booking" class="svc-link">Book now →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon">🗺️</div>
+      <div class="svc-title">Kerala Tour Packages</div>
+      <div class="svc-desc">Backwaters, hill stations, wildlife sanctuaries – explore all of God's Own Country.</div>
+      <a href="#booking" class="svc-link">View packages →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon">🇮🇳</div>
+      <div class="svc-title">All India Travels</div>
+      <div class="svc-desc">Long-distance trips anywhere in India with experienced drivers. Comfortable & safe.</div>
+      <a href="#booking" class="svc-link">Plan your trip →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon">💒</div>
+      <div class="svc-title">Wedding Cars</div>
+      <div class="svc-desc">Decorated vehicles for weddings, receptions, and special events across Kerala.</div>
+      <a href="#booking" class="svc-link">Get a quote →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon">🏢</div>
+      <div class="svc-title">Corporate Cabs</div>
+      <div class="svc-desc">Monthly packages for offices, employee transport, and business travel needs.</div>
+      <a href="#booking" class="svc-link">Enquire now →</a>
+    </div>
+    <div class="service-card">
+      <div class="svc-icon">🛕</div>
+      <div class="svc-title">Pilgrimage Tours</div>
+      <div class="svc-desc">Sabarimala, Guruvayur, Velankanni and other sacred destinations covered.</div>
+      <a href="#booking" class="svc-link">Explore tours →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="why-section">
+  <div style="max-width:1050px;margin:0 auto">
+    <div class="section-label" style="color:var(--blue)">Why Choose Us</div>
+    <div class="section-title" style="color:var(--dark);margin-bottom:40px">Kerala's Most Trusted<br>Taxi Service</div>
+    <div class="why-grid">
+      <div class="why-visual">
+        <div class="why-metric"><div class="why-metric-num">98%</div><div class="why-metric-label">On-Time Rate</div></div>
+        <div class="why-metric"><div class="why-metric-num">4.9★</div><div class="why-metric-label">Avg Rating</div></div>
+        <div class="why-metric"><div class="why-metric-num">50+</div><div class="why-metric-label">Vehicles</div></div>
+        <div class="why-metric"><div class="why-metric-num">100%</div><div class="why-metric-label">Safe Trips</div></div>
+      </div>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon">✅</div>
+          <div class="why-text"><h4>Verified, Professional Drivers</h4><p>All drivers are police-verified, licensed, and trained for safe, courteous service.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">💰</div>
+          <div class="why-text"><h4>Transparent Pricing</h4><p>No hidden charges. Fixed rates for most routes. Get a quote before you book.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">📱</div>
+          <div class="why-text"><h4>24/7 Customer Support</h4><p>Reach us anytime by phone or WhatsApp. We're always here to help you.</p></div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🛡️</div>
+          <div class="why-text"><h4>Fully Insured Vehicles</h4><p>Every vehicle is insured and regularly serviced for your safety and peace of mind.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet" class="fleet-section">
+  <div class="section-label">Our Fleet</div>
+  <div class="section-title">Choose Your Ride</div>
+  <div class="section-sub" style="color:rgba(255,255,255,0.55)">Well-maintained vehicles for every need and budget</div>
+  <div class="fleet-grid" style="margin-top:36px">
+    <div class="fleet-card">
+      <div class="fleet-img">🚗</div>
+      <div class="fleet-info">
+        <div class="fleet-name">Sedan</div>
+        <div class="fleet-meta">
+          <span class="fleet-tag">4 Seats</span><span class="fleet-tag">AC</span><span class="fleet-tag">Swift Dzire / Etios</span>
+        </div>
+        <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px">Ideal for city rides and short outstation trips</p>
+      </div>
+    </div>
+    <div class="fleet-card">
+      <div class="fleet-img">🚙</div>
+      <div class="fleet-info">
+        <div class="fleet-name">SUV / MUV</div>
+        <div class="fleet-meta">
+          <span class="fleet-tag">6–7 Seats</span><span class="fleet-tag">AC</span><span class="fleet-tag">Innova / Xylo</span>
+        </div>
+        <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px">Perfect for families and long-distance travel</p>
+      </div>
+    </div>
+    <div class="fleet-card">
+      <div class="fleet-img">🚌</div>
+      <div class="fleet-info">
+        <div class="fleet-name">Tempo Traveller</div>
+        <div class="fleet-meta">
+          <span class="fleet-tag">12–17 Seats</span><span class="fleet-tag">AC</span><span class="fleet-tag">Group Travel</span>
+        </div>
+        <p style="color:rgba(255,255,255,0.5);font-size:12px;margin-top:10px">Best for group tours, pilgrimages and events</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-label" style="color:var(--blue)">Reviews</div>
+  <div class="section-title" style="color:var(--dark)">What Our Customers Say</div>
+  <div class="section-sub" style="color:var(--muted)">Real feedback from real travellers</div>
+  <div class="testi-grid" style="margin-top:36px">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Excellent service! Driver was punctual, car was clean. Booked for airport pickup at 3 AM and they were right on time."</div>
+      <div class="testi-author">Anu Mathew</div>
+      <div class="testi-loc">Ernakulam, Kerala</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"We hired Manimuttam for our entire Munnar trip. Very professional, comfortable ride. Highly recommend to all families!"</div>
+      <div class="testi-author">Suresh Nair</div>
+      <div class="testi-loc">Thrissur, Kerala</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★☆</div>
+      <div class="testi-text">"Very affordable rates compared to other taxi services in Kochi. Driver was friendly and knowledgeable about routes."</div>
+      <div class="testi-author">Priya Menon</div>
+      <div class="testi-loc">Kottayam, Kerala</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label">Get In Touch</div>
+      <h2>Ready to Travel?<br>Call Us Now</h2>
+      <p>Available 24 hours a day, 7 days a week. We're always ready to take you where you need to go.</p>
+      <div class="contact-item">
+        <div class="c-icon">📞</div>
+        <div class="c-text"><strong>Phone / WhatsApp</strong>8606650815</div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">📍</div>
+        <div class="c-text"><strong>Service Area</strong>All Kerala & Pan India</div>
+      </div>
+      <div class="contact-item">
+        <div class="c-icon">🕐</div>
+        <div class="c-text"><strong>Availability</strong>24/7 – 365 Days</div>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <div class="cta-card">
+        <div class="big">📞 860 665 0815</div>
+        <div class="label">One call to book your ride</div>
+      </div>
+      <button class="cta-btn" onclick="window.location.href='tel:8606650815'">Call to Book Now</button>
+      <button class="cta-btn" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)" onclick="window.open('https://wa.me/918606650815','_blank')">Chat on WhatsApp</button>
+      <a href="#booking" style="display:block;text-align:center;color:var(--gold);font-size:14px;font-weight:600;text-decoration:none;margin-top:4px">Or fill booking form above →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Manimuttam Tours & Travels</span> · Kerala, India · All rights reserved</p>
+  <p style="margin-top:6px">Crafted with care for travellers across Kerala</p>
+</footer>
+
+<script>
+function handleBook(e){
+  e.preventDefault();
+  var n=document.getElementById('bk-name').value.trim();
+  var p=document.getElementById('bk-phone').value.trim();
+  var f=document.getElementById('bk-from').value.trim();
+  var t=document.getElementById('bk-to').value.trim();
+  if(!n||!p||!f||!t){alert('Please fill in Name, Phone, Pickup and Drop locations.');return;}
+  alert('Thank you, '+n+'!\n\nYour booking request from '+f+' to '+t+' has been received.\nWe will call you at '+p+' to confirm shortly.\n\n– Manimuttam Tours & Travels');
+}
+// Smooth nav scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}
+  })
+});
+// Animate stats on scroll
+var animated=false;
+window.addEventListener('scroll',function(){
+  if(!animated&&window.scrollY>200){
+    animated=true;
+    document.querySelectorAll('.stat-num').forEach(function(el){
+      el.style.transition='opacity .5s';el.style.opacity='0';
+      setTimeout(function(){el.style.opacity='1'},100)
+    })
+  }
+})
+</script>
+</body>
+</html>
