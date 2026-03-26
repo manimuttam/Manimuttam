@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +26,11 @@
   .nav-cta:hover{opacity:.85}
 
   /* HERO */
-  .hero{min-height:100vh;background:linear-gradient(135deg,#0a1628 0%,#0d3b7c 55%,#1a6fc4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 6% 60px;position:relative;overflow:hidden}
+  .hero{min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 6% 60px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;display:grid;grid-template-columns:1fr 1fr;height:100%}
+  .hero-bg-img{width:100%;height:100%;object-fit:cover;object-position:center}
+  .hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,22,40,0.92) 0%,rgba(13,59,124,0.88) 55%,rgba(26,111,196,0.82) 100%);z-index:1}
+  .hero>*:not(.hero-bg):not(.hero-bg-overlay){position:relative;z-index:2}
   .hero::before{content:'';position:absolute;top:-80px;right:-120px;width:520px;height:520px;border-radius:50%;background:rgba(245,166,35,0.08);pointer-events:none}
   .hero::after{content:'';position:absolute;bottom:-100px;left:-80px;width:380px;height:380px;border-radius:50%;background:rgba(26,111,196,0.13);pointer-events:none}
   .hero-badge{background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);color:var(--gold);padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;letter-spacing:1px;margin-bottom:22px;display:inline-block}
@@ -186,6 +189,12 @@
 
 <!-- HERO -->
 <section class="hero">
+  <!-- Background vehicle images -->
+  <div class="hero-bg">
+    <img class="hero-bg-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/2023_Maruti_Suzuki_Dzire_%28facelift%2C_India%29%2C_front_8.21.jpg/800px-2023_Maruti_Suzuki_Dzire_%28facelift%2C_India%29%2C_front_8.21.jpg" alt="Swift Dzire" onerror="this.style.background='#0a1628'">
+    <img class="hero-bg-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2023_Toyota_Innova_Hycross_V_Hybrid%2C_front_8.21.jpg/800px-2023_Toyota_Innova_Hycross_V_Hybrid%2C_front_8.21.jpg" alt="Innova Hycross" onerror="this.style.background='#0d3b7c'">
+  </div>
+  <div class="hero-bg-overlay"></div>
   <div class="hero-badge">Kerala's Trusted Cab Service</div>
   <h1>Your Journey,<br>Our <span>Commitment</span></h1>
   <p>Comfortable, safe, and affordable taxi services across Kerala and all over India. Available 24/7 for you.</p>
